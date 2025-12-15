@@ -1,0 +1,63 @@
+\documentclass[aspectratio=169, 22pt]{beamer}
+
+\usetheme{usyd}
+\usefonttheme{usyd}
+\usepackage{bookmark}
+
+\usepackage{listings}
+
+\lstset{
+  basicstyle=\ttfamily\small,
+  columns=fullflexible,
+  frame=single,
+  breaklines=true
+}
+
+\title{Font Test}
+\subtitle{subtitle}
+\author{Your Name}
+\date{\today}
+
+\begin{document}
+
+\begin{frame}
+  \titlepage
+\end{frame}
+
+\begin{frame}{Math font check (Tinos)}
+  Inline math: $x + y = z$.
+
+  \vspace{0.5em}
+  Roman + bold + text-in-math should be Tinos:
+  \[
+    \mathrm{KL}(p\|q)
+    \;=\;
+    \mathbf{W}\,x
+    \;+\;
+    \text{(regularization term)}
+  \]
+
+  \vspace{0.5em}
+  Also check mixed styles:
+  \[
+    \mathit{loss}(\mathbf{w}) = \sum_{i=1}^n \mathrm{log}\,p(y_i \mid x_i;\mathbf{w})
+    \quad\text{where}\quad
+    \mathrm{log}\text{ is upright.}
+  \]
+\end{frame}
+
+\begin{frame}[fragile]{Code example (GoogleSansCode)}
+\begin{lstlisting}[language=Python]
+import math
+
+def softmax(xs):
+    m = max(xs)
+    exps = [math.exp(x - m) for x in xs]
+    s = sum(exps)
+    return [e / s for e in exps]
+
+print(softmax([1.0, 2.0, 3.0]))
+\end{lstlisting}
+\end{frame}
+
+\end{document}

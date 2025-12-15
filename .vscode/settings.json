@@ -1,0 +1,23 @@
+{
+  "latex-workshop.latex.recipe.default": "Make (project)",
+  "latex-workshop.latex.autoBuild.run": "onSave",
+  "latex-workshop.latex.build.forceRecipeUsage": true,
+
+  "latex-workshop.latex.tools": [
+    {
+      "name": "make",
+      "command": "make",
+      "args": ["all"]
+    }
+  ],
+
+  "latex-workshop.latex.recipes": [
+    {
+      "name": "Make (project)",
+      "tools": ["make"]
+    }
+  ],
+
+  "latex-workshop.latex.mainfile": "slides.tex",
+  "latex-workshop.latex.rootFile.doNotPrompt": true
+}

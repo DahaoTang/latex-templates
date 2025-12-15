@@ -1,0 +1,123 @@
+\ProvidesPackage{beamerfontthemeusyd}[2025/12/15 USYD font theme (Tw Cen MT / Tinos / GoogleSansCode)]
+
+\RequirePackage{iftex}
+\ifXeTeX\else
+  \PackageError{beamerfontthemeusyd}{This theme requires XeLaTeX}{Use xelatex.}
+\fi
+
+\RequirePackage{fontspec}
+\defaultfontfeatures{Ligatures=TeX}
+
+% -------- Paths (relative to slides.tex) --------
+\newcommand*\USYDFontPath{./fonts/}
+
+% -------- Text font: Tw Cen MT (only regular file provided) --------
+% We deliberately load by filename to avoid relying on macOS-installed fonts.
+\setmainfont[
+  Path=\USYDFontPath,
+  Extension=.ttf,
+  UprightFont=Tw-Cen-MT,
+  BoldFont=Tw-Cen-MT,
+  ItalicFont=Tw-Cen-MT,
+  BoldItalicFont=Tw-Cen-MT,
+  BoldFeatures={FakeBold=2.0},
+  ItalicFeatures={FakeSlant=0.20},
+  BoldItalicFeatures={FakeBold=2.0,FakeSlant=0.20}
+]{Tw-Cen-MT}
+
+% Beamer typically uses sans for body; we keep everything aligned to Tw Cen MT.
+\setsansfont[
+  Path=\USYDFontPath,
+  Extension=.ttf,
+  UprightFont=Tw-Cen-MT,
+  BoldFont=Tw-Cen-MT,
+  ItalicFont=Tw-Cen-MT,
+  BoldItalicFont=Tw-Cen-MT,
+  BoldFeatures={FakeBold=2.0},
+  ItalicFeatures={FakeSlant=0.20},
+  BoldItalicFeatures={FakeBold=2.0,FakeSlant=0.20}
+]{Tw-Cen-MT}
+
+% -------- Code font: GoogleSansCode (full family provided) --------
+\setmonofont[
+  Path=\USYDFontPath,
+  Extension=.ttf,
+  UprightFont=GoogleSansCode-Regular,
+  ItalicFont=GoogleSansCode-Italic,
+  BoldFont=GoogleSansCode-Bold,
+  BoldItalicFont=GoogleSansCode-BoldItalic
+]{GoogleSansCode-Regular}
+
+% -------- Math font strategy (NO unicode-math) --------
+% We cannot use unicode-math without an OpenType Math font. Instead:
+% - keep standard math symbols from TeX
+% - force all Latin math alphabets / \mathrm / \mathbf / \mathit, etc. to Tinos
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+
+% Load Tinos as an NFSS family via fontspec and capture the family name.
+\newfontfamily\USYDTinos[
+  Path=\USYDFontPath,
+  Extension=.ttf,
+  UprightFont=Tinos-Regular,
+  ItalicFont=Tinos-Italic,
+  BoldFont=Tinos-Bold,
+  BoldItalicFont=Tinos-BoldItalic
+]{Tinos-Regular}
+
+\newcommand*\USYD@TinosFamily{} % will be set at begin document
+
+\AtBeginDocument{%
+  % Capture the NFSS family name created by fontspec for \USYDTinos
+  \begingroup\USYDTinos\global\edef\USYD@TinosFamily{\f@family}\endgroup
+
+  % Default math letters (\mathnormal) in italic Tinos (so x,y,z, etc. stop using Tw Cen MT)
+  \DeclareMathAlphabet{\mathnormal}{TU}{\USYD@TinosFamily}{m}{it}
+  \SetMathAlphabet{\mathnormal}{bold}{TU}{\USYD@TinosFamily}{b}{it}
+
+  % Upright roman in math (\mathrm)
+  \DeclareMathAlphabet{\mathrm}{TU}{\USYD@TinosFamily}{m}{n}
+  \SetMathAlphabet{\mathrm}{bold}{TU}{\USYD@TinosFamily}{b}{n}
+
+  % Bold upright in math (\mathbf)
+  \DeclareMathAlphabet{\mathbf}{TU}{\USYD@TinosFamily}{b}{n}
+
+  % Italic in math (\mathit)
+  \DeclareMathAlphabet{\mathit}{TU}{\USYD@TinosFamily}{m}{it}
+  \SetMathAlphabet{\mathit}{bold}{TU}{\USYD@TinosFamily}{b}{it}
+
+  % Sans in math (\mathsf) — keep consistent with requested "Tinos for math"
+  \DeclareMathAlphabet{\mathsf}{TU}{\USYD@TinosFamily}{m}{n}
+  \SetMathAlphabet{\mathsf}{bold}{TU}{\USYD@TinosFamily}{b}{n}
+
+  % Typewriter in math (\mathtt) — use the code font family
+  % Capture monofont family
+  \begingroup\ttfamily\global\edef\USYD@MonoFamily{\f@family}\endgroup
+  \DeclareMathAlphabet{\mathtt}{TU}{\USYD@MonoFamily}{m}{n}
+  \SetMathAlphabet{\mathtt}{bold}{TU}{\USYD@MonoFamily}{b}{n}
+}
+
+% Ensure \text{...} inside math uses Tinos (not Tw Cen MT)
+% Keep normal \text outside math untouched.
+\let\USYD@origtext\text
+\renewcommand{\text}[1]{%
+  \ifmmode
+    \hbox{\USYDTinos #1}%
+  \else
+    \USYD@origtext{#1}%
+  \fi
+}
+
+% Beamer font selections (optional, but keeps consistency)
+\setbeamerfont{title}{family=\rmfamily,series=\bfseries,size=\LARGE}
+\setbeamerfont{subtitle}{family=\rmfamily,series=\bfseries,size=\Large}
+\setbeamerfont{frametitle}{family=\rmfamily,series=\bfseries,size=\Large}
+\setbeamerfont{normal text}{family=\rmfamily}
+\setbeamerfont{structure}{family=\rmfamily}
+
+\setbeamerfont{author}{size=\normalsize}
+\setbeamerfont{date}{size=\normalsize}
+\setbeamerfont{block title}{size=\normalsize}
+\setbeamerfont{block body}{size=\small}
+\setbeamerfont{footline}{size=\scriptsize}
+

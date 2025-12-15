@@ -1,0 +1,168 @@
+\ProvidesPackage{beamerthemeusyd}[USYD beamer theme]
+\mode<presentation>
+
+\RequirePackage{tikz}
+\RequirePackage{graphicx}
+\RequirePackage{etoolbox}
+
+% --------------------
+% Logo Definition
+% --------------------
+\graphicspath{{assets/}}
+
+\gdef\USYD@logo{USYDLogo}
+\gdef\USYD@affiliationlogo{}
+\gdef\USYD@titlegraphic{USYDTitle}
+\gdef\USYD@titlegraphicbackground{usydwhite}
+
+\def\logo#1{\gdef\USYD@logo{#1}}
+\def\affiliationlogo#1{\gdef\USYD@affiliationlogo{#1}}
+\def\titlegraphic#1{\gdef\USYD@titlegraphic{#1}}
+\def\titlegraphicbackground#1{\gdef\USYD@titlegraphicbackground{#1}}
+
+% ------------------------------
+% Load colour and font theme
+% ------------------------------
+\usecolortheme{usyd}
+\usefonttheme{usyd}
+
+% --------------------
+% Hyperref styling
+% --------------------
+\hypersetup{
+  colorlinks=true,
+  urlcolor=usydred,
+  linkcolor=,
+}
+
+% No navigation symbols
+\setbeamertemplate{navigation symbols}{}
+
+% --------------------
+% Background
+% --------------------
+\setbeamertemplate{background}{%
+  \begin{tikzpicture}
+    \ifnum\thepage=1\relax%
+      \useasboundingbox (0,0) rectangle(\the\paperwidth, \the\paperheight);
+
+      % Left red half (text area)
+      \fill[color=usydred]
+        (0,0) rectangle (0.5*\the\paperwidth, \the\paperheight);
+
+      % Right half background (image area)
+      \fill[color=\USYD@titlegraphicbackground]
+        (0.5*\the\paperwidth,0) rectangle (\the\paperwidth, \the\paperheight);
+
+      % Title graphic centered in right half
+      \node[inner sep=0pt] (titlegraphic) at (0.75*\paperwidth, 0.5*\paperheight) {%
+        \includegraphics[
+          width=0.5\paperwidth,
+          height=\Gin@nat@height,
+          keepaspectratio
+        ]{\USYD@titlegraphic}%
+      };
+
+      % Logos near bottom-left area of the page (as provided)
+      \hskip-10pt
+      \node[inner sep=0pt] (logo) at (1.85, 1.2) {%
+        \usebeamertemplate*{logo titlepage}%
+      };
+      % \node[inner sep=0pt] (afflogo) at (6.4, 1.4) {%
+      %   \usebeamertemplate*{affiliationlogo titlepage}%
+      % };
+    \else
+      \fill[usydwhite,opacity=1]
+        (0,0) rectangle (\the\paperwidth, \the\paperheight);
+    \fi
+  \end{tikzpicture}%
+}
+
+% ------------------------------
+% Title page template
+% ------------------------------
+\defbeamertemplate*{title page}{usyd}[1][]{
+  \newlength\beamertitlebox
+  \setlength\beamertitlebox{\dimexpr0.5\paperwidth-\Gm@lmargin}
+  \begingroup
+    \hskip-10pt
+    \begin{beamercolorbox}[sep=0pt,wd=\beamertitlebox,#1]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty\par%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%
+    \end{beamercolorbox}\vskip2em
+
+    \hskip-10pt
+    \begin{beamercolorbox}[sep=0pt,wd=\beamertitlebox,#1]{author}
+      \usebeamerfont{author}\insertauthor%
+    \end{beamercolorbox}\vskip1em
+
+    \hskip-10pt
+    \begin{beamercolorbox}[sep=0pt,wd=\beamertitlebox,#1]{date}
+      \usebeamerfont{date}\insertdate%
+    \end{beamercolorbox}
+  \endgroup
+}
+
+% --------------------
+% Footline:
+% --------------------
+\defbeamertemplate*{footline}{usyd}{%
+  \ifnum\thepage=1\relax%
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=4ex]{placeholder}%
+    \end{beamercolorbox}%
+  \else
+    \begin{beamercolorbox}[wd=\paperwidth,ht=3ex,dp=4ex,leftskip=4em,rightskip=4em]{institute in footline}%
+      University of Sydney\hfill\insertframenumber{}%
+    \end{beamercolorbox}%
+  \fi
+}
+
+% Titlepage logo templates
+\defbeamertemplate*{logo titlepage}{usyd}{%
+  \includegraphics[width=2.4cm]{\USYD@logo}%
+}
+\defbeamertemplate*{affiliationlogo titlepage}{usyd}{%
+  \ifdefempty{\USYD@affiliationlogo}{}{%
+    \includegraphics[width=2.2cm]{\USYD@affiliationlogo}%
+  }%
+}
+
+% Generic logo template (not title page)
+\defbeamertemplate*{logo}{usyd}{%
+  \includegraphics[height=3em]{\USYD@logo}%
+}
+
+% No sidebar
+\defbeamertemplate*{sidebar right}{usyd}{}
+
+\defbeamertemplate*{frametitle}{usyd}[1][]{
+  \vskip12pt
+  \begin{beamercolorbox}[#1]{frametitle}
+    \usebeamerfont{frametitle}\insertframetitle\par%
+  \end{beamercolorbox}
+}
+
+% % ============================================================
+% % Apply the consolidated templates
+% % (Options retained for compatibility; styling remains consistent
+% % with provided inner/outer files unless you later add variants.)
+% % ============================================================
+
+% \setbeamertemplate{title page}[usyd]
+% \setbeamertemplate{footline}[usyd]
+% \setbeamertemplate{frametitle}[usyd]
+
+% % \setbeamertemplate{block begin}{
+% %   \begin{beamercolorbox}[wd=0.8\textwidth,leftskip=0.8em]{block title}
+% %     \usebeamerfont*{block title}\insertblocktitle
+% %   \end{beamercolorbox}
+% %   \nointerlineskip
+% %   \begin{beamercolorbox}[wd=0.8\textwidth,sep=0.75em]{block body}
+% %     \usebeamerfont{block body}
+% % }
+
+\mode<all>

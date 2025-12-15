@@ -1,0 +1,63 @@
+\documentclass[aspectratio=169, 22pt]{beamer}
+
+\usetheme{CambridgeUS}
+\usecolortheme{whale}
+\definecolor{WhaleBlue}{RGB}{51,51,178}
+\setbeamercolor{frametitle}{fg=WhaleBlue}
+
+\usepackage{graphicx}
+\graphicspath{{assets/}}
+\usepackage{tabularx}
+\usepackage{appendix}
+\usepackage{etoolbox}
+\usepackage[absolute,overlay]{textpos}
+\newcommand{\bottomleftnote}[1]{%
+  \begin{textblock*}{0.5\textwidth}(0.5cm, 9cm)
+    \tiny {#1}
+  \end{textblock*}
+}
+\usepackage{hyperref}
+\usepackage[
+  backend=biber,
+  style=ieee,
+  sorting=ynt
+]{biblatex}
+\addbibresource{refs.bib}
+\AtBeginBibliography{
+  \tiny % or \scriptsize, etc.
+}
+
+
+\title[]{}
+\author[D. Tang]{Dahao Tang}
+\institute[Faculty of Science]{Faculty of Science, University of Sydney}
+\date{}
+\logo{\includegraphics[height=0.8cm]{logo-usyd-dark.pdf}}
+
+\begin{document}
+
+% Cover
+\begin{frame}
+  \titlepage
+\end{frame}
+
+% Outline
+\begin{frame}{Outline}
+  \setcounter{tocdepth}{1}
+  \tableofcontents
+\end{frame}
+
+% Introduction
+\section{}
+\begin{frame}{}
+    
+\end{frame}
+
+
+\section{Reference}
+\begin{frame}[allowframebreaks, noframenumbering]
+  \frametitle{Reference}
+  \printbibliography[heading=none]
+\end{frame}
+
+\end{document}
