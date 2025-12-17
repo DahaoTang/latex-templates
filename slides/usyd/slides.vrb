@@ -1,0 +1,15 @@
+\frametitle{Code Example (Google Sans Code)}
+The following code block uses the theme colors automatically.
+
+  \begin{lstlisting}[language=Python]
+    import math
+
+    def softmax(xs):
+        """Compute softmax values for a list of numbers."""
+        m = max(xs)
+        exps = [math.exp(x - m) for x in xs]
+        s = sum(exps)
+        return [e / s for e in exps]
+
+    print(softmax([1.0, 2.0, 3.0]))
+  \end{lstlisting}
