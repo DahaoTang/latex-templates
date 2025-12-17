@@ -9,12 +9,11 @@
 %==============================================================================
 %                                 DEPENDENCIES
 %==============================================================================
-\RequirePackage{tikz}       % Drawing the background layout
-\RequirePackage{graphicx}   % Image handling
-\RequirePackage{etoolbox}   % Conditional logic (\ifdefempty)
-% [NEW] adjustbox with 'export' enables 'min width/height' keys for \includegraphics
-% This is required to make the title image "cover" the area without distortion.
-\RequirePackage[export]{adjustbox} 
+\RequirePackage{tikz}                 % Drawing the background layout
+\RequirePackage{graphicx}             % Image handling
+\RequirePackage{etoolbox}             % Conditional logic (\ifdefempty)
+\RequirePackage[export]{adjustbox}    % Make title image "cover" the area without distortion
+\RequirePackage{listings}             % Code formatting
 
 %==============================================================================
 %                           ASSETS AND CONFIGURATION
@@ -97,7 +96,7 @@
       \end{scope}
 
       % 3. Logos (Layered on top)
-      \node[inner sep=0pt, anchor=base west] at (0.7, 1.2) {%
+      \node[inner sep=0pt, anchor=base west] at (0.7, 0.5) {%
         \usebeamertemplate*{logo titlepage}%
       };
 
@@ -136,6 +135,12 @@
     \begin{beamercolorbox}[sep=0pt, wd=\beamertitlebox, #1]{author}
       \usebeamerfont{author}\insertauthor%
     \end{beamercolorbox}%
+    \vskip0.25em
+
+    \hskip-10pt%
+    \begin{beamercolorbox}[sep=0pt, wd=\beamertitlebox, #1]{institute}
+      \usebeamerfont{institute}\insertinstitute%
+    \end{beamercolorbox}%
     \vskip1em
 
     \hskip-10pt%
@@ -164,7 +169,7 @@
 %==============================================================================
 
 \defbeamertemplate*{logo titlepage}{usyd}{%
-  \includegraphics[width=2.4cm]{\USYD@logo}%
+  \includegraphics[width=3.6cm]{\USYD@logo}%
 }
 
 \defbeamertemplate*{affiliationlogo titlepage}{usyd}{%

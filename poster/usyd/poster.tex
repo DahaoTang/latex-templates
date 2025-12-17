@@ -129,8 +129,9 @@
       \begin{block}{Introduction}
         Selecting the right look-back horizon is critical for time series forecasting, 
         yet existing scaling-law insights assume centralized, IID data and fail under the heterogeneity of federated learning. 
-        In decentralized settings, clients differ in dynamics, noise, and sequence structure, making a fixed global horizon suboptimal. 
-        We introduce a principled framework that uses a structured Synthetic Data Generator to capture shared temporal patterns and client-specific variability. 
+        In decentralized settings, clients differ in dynamics, noise, and sequence structure, 
+        making a fixed global horizon suboptimal. We introduce a principled framework that 
+        uses a structured Synthetic Data Generator to capture shared temporal patterns and client-specific variability. 
         
         Our contributions include:
         \begin{itemize}
@@ -151,7 +152,8 @@
         \end{figure}
 
         An SDG is a parametric model designed to simulate univariate time series data characterized by seasonality, 
-        temporal dependence (AR memory), and trend. For a given client $k$, feature $f$, and time step $t$, the observation $\hat{x}_{f,t,k}$ is:
+        temporal dependence (AR memory), and trend. For a given client $k$, feature $f$, 
+        and time step $t$, the observation $\hat{x}_{f,t,k}$ is:
         \begin{equation}
         \label{eq:sdg}
           \begin{split}
@@ -268,7 +270,8 @@
       \begin{block}{Unimodality and Optimal Horizon}
           
         If for a given $\delta>0$ the Bayesian loss satisfies $\Delta L_{\mathrm{Bayes}}^{(k)}(H) \le -\delta$ for all $H < H_k^*(\delta)$, 
-        and the approximation loss satisfies $\Delta L_{\mathrm{approx}}^{(k)}(H;m) \ge \delta$ for all $H \ge H_k^*(\delta)$, then the combined loss obeys that $L^{(k)}(H)$ decreases on $[1, H_k^*(\delta)]$, and $L^{(k)}(H)$ increases on $[H_k^*(\delta),\infty)$. 
+        and the approximation loss satisfies $\Delta L_{\mathrm{approx}}^{(k)}(H;m) \ge \delta$ for all $H \ge H_k^*(\delta)$, 
+        then the combined loss obeys that $L^{(k)}(H)$ decreases on $[1, H_k^*(\delta)]$, and $L^{(k)}(H)$ increases on $[H_k^*(\delta),\infty)$. 
 
         Consequently, $H_k^*(\delta) \in \arg\min_{H\in\mathbb{N}} L^{(k)}(H)$ with uniqueness up to integer ties.
 
@@ -293,7 +296,10 @@
         \end{equation}
 
         Fix any $\delta \in (0,\eta)$ and define $H^*(\delta)$ as the smallest $H \ge H_0$ with $\Delta L_{\mathrm{Bayes}}(H,S) \ge -\delta$. 
-        Then for $H < H^*(\delta)$, we have $\Delta L_{\mathrm{Bayes}}(H,S) < -\delta$ and $\Delta L_{\mathrm{approx}}(H,S) \ge 0$, so $ \Delta L(H,S) = \Delta L_{\mathrm{Bayes}}(H,S) + \Delta L_{\mathrm{approx}}(H,S) < -\delta < 0$, and $L(H,S)$ is strictly decreasing. For $H \ge H^*(\delta)$, we have $\Delta L_{\mathrm{Bayes}}(H,S) \ge -\delta$ and $\Delta L_{\mathrm{approx}}(H,S) \ge \eta$, hence $\Delta L(H,S) \ \ge \ -\delta + \eta \ > \ 0$, so $L(H,S)$ is strictly increasing.
+        Then for $H < H^*(\delta)$, we have $\Delta L_{\mathrm{Bayes}}(H,S) < -\delta$ and $\Delta L_{\mathrm{approx}}(H,S) \ge 0$, 
+        so $ \Delta L(H,S) = \Delta L_{\mathrm{Bayes}}(H,S) + \Delta L_{\mathrm{approx}}(H,S) < -\delta < 0$, 
+        and $L(H,S)$ is strictly decreasing. For $H \ge H^*(\delta)$, we have $\Delta L_{\mathrm{Bayes}}(H,S) \ge -\delta$ and 
+        $\Delta L_{\mathrm{approx}}(H,S) \ge \eta$, hence $\Delta L(H,S) \ \ge \ -\delta + \eta \ > \ 0$, so $L(H,S)$ is strictly increasing.
 
         Thus $L(H, S)$ decreases up to $H^*(\delta)$ and increases thereafter, 
         so it is unimodal in $H$ and attains its unique minimum at $H^*(\delta)$ (up to trivial ties), as claimed.

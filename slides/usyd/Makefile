@@ -1,7 +1,7 @@
 # =========================
 # Project configuration
 # =========================
-MAIN    = slides
+MAIN    = DOz-echocardiography
 ENGINE  = xelatex
 FLAGS   = -interaction=nonstopmode -file-line-error
 

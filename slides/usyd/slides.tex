@@ -16,7 +16,8 @@
 %==============================================================================
 \usepackage{bookmark}  % Fixes PDF bookmarks in Beamer
 \usepackage{booktabs}  % Professional tables
-\usepackage{listings}  % Code formatting
+
+% Bib
 \usepackage[
   backend=biber,
   style=ieee,
@@ -55,11 +56,12 @@
 %==============================================================================
 %                                 METADATA
 %==============================================================================
-\title{Presentation Title}
-\subtitle{Subtitle or Conference Name}
-\author{Firstname Lastname}
-\institute{School of Computer Science\\University of Sydney}
-\date{\today}
+\title{\large Automated AI quantification of Cardiac Function for Early Disease Risk Stratification 
+and Discovery of Genetic Drivers}
+\subtitle{\small Co-supervised by: \\ Prof. David James and Prof. Jinman Kim}
+\author{Dahao Tang}
+\institute{Faculty of Science}
+\date{}
 
 %==============================================================================
 %                                 DOCUMENT
@@ -69,6 +71,12 @@
 % --- Title Slide ---
 \begin{frame}
   \titlepage
+\end{frame}
+
+\section{Main}
+% --- Table of Contents ---
+\begin{frame}
+  \tableofcontents
 \end{frame}
 
 % --- Frame 1: Standard Lists ---
@@ -119,18 +127,18 @@
 \begin{frame}[fragile]{Code Example (Google Sans Code)}
   The following code block uses the theme colors automatically.
 
-\begin{lstlisting}
-import math
+  \begin{lstlisting}[language=Python]
+    import math
 
-def softmax(xs):
-    """Compute softmax values for a list of numbers."""
-    m = max(xs)
-    exps = [math.exp(x - m) for x in xs]
-    s = sum(exps)
-    return [e / s for e in exps]
+    def softmax(xs):
+        """Compute softmax values for a list of numbers."""
+        m = max(xs)
+        exps = [math.exp(x - m) for x in xs]
+        s = sum(exps)
+        return [e / s for e in exps]
 
-print(softmax([1.0, 2.0, 3.0]))
-\end{lstlisting}
+    print(softmax([1.0, 2.0, 3.0]))
+  \end{lstlisting}
 \end{frame}
 
 \section{Reference}
