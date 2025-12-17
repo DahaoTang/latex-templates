@@ -30,10 +30,10 @@
 \gdef\USYD@titlegraphicbackground{usydwhite}
 
 % --- Public API (User Commands) ---
-\def\logo#1{\gdef\USYD@logo{#1}}
-\def\affiliationlogo#1{\gdef\USYD@affiliationlogo{#1}}
-\def\titlegraphic#1{\gdef\USYD@titlegraphic{#1}}
-\def\titlegraphicbackground#1{\gdef\USYD@titlegraphicbackground{#1}}
+% \def\logo#1{\gdef\USYD@logo{#1}}
+% \def\affiliationlogo#1{\gdef\USYD@affiliationlogo{#1}}
+% \def\titlegraphic#1{\gdef\USYD@titlegraphic{#1}}
+% \def\titlegraphicbackground#1{\gdef\USYD@titlegraphicbackground{#1}}
 
 %==============================================================================
 %                             THEME IMPORT
@@ -65,31 +65,31 @@
       \useasboundingbox (0,0) rectangle(\the\paperwidth, \the\paperheight);
 
       % 1. Left Panel (Red Text Area)
-      \fill[color=usydred] (0,0) rectangle (0.5\paperwidth, \paperheight);
+      \fill[color=usydred] (0,0) rectangle (0.6\paperwidth, \paperheight);
 
       % 2. Right Panel (Image Area with Clipping)
       % We use a scope and \clip to ensure the "cover" image doesn't bleed 
       % into the left panel or off the page.
       \begin{scope}
-        \clip (0.5\paperwidth, 0) rectangle (\paperwidth, \paperheight);
+        \clip (0.6\paperwidth, 0) rectangle (\paperwidth, \paperheight);
         
         % Background color (failsafe if image is transparent or missing)
         \fill[color=\USYD@titlegraphicbackground] 
-             (0.5\paperwidth,0) rectangle (\paperwidth, \paperheight);
+             (0.6\paperwidth,0) rectangle (\paperwidth, \paperheight);
 
         % The Image Node
         % centered at the middle of the right pane
-        \node[inner sep=0pt, anchor=center] at (0.75\paperwidth, 0.5\paperheight) {%
+        \node[inner sep=0pt, anchor=center] at (0.8\paperwidth, 0.5\paperheight) {%
           \includegraphics[
             % Logic for "Object Fit: Cover":
             % 1. Set width and height to the target box size
-            width=0.5\paperwidth,
+            width=0.4\paperwidth,
             height=\paperheight,
             % 2. Maintain aspect ratio
             keepaspectratio,
             % 3. Force minimum dimensions to ensure it covers the whole box
             % (Requires adjustbox package)
-            min width=0.5\paperwidth,
+            min width=0.4\paperwidth,
             min height=\paperheight
           ]{\USYD@titlegraphic}%
         };
@@ -117,7 +117,7 @@
 %==============================================================================
 \defbeamertemplate*{title page}{usyd}[1][]{
   \newlength\beamertitlebox
-  \setlength\beamertitlebox{\dimexpr0.5\paperwidth-\Gm@lmargin\relax}
+  \setlength\beamertitlebox{\dimexpr0.6\paperwidth-\Gm@lmargin\relax}
   
   \begingroup
     \hskip-10pt%
@@ -189,6 +189,28 @@
   \begin{beamercolorbox}[#1]{frametitle}
     \usebeamerfont{frametitle}\insertframetitle\par%
   \end{beamercolorbox}%
+}
+
+% Configure code blocks to match the USYD Red/Grey theme
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small\color{usydblack},
+  keywordstyle=\color{usydred}\bfseries,
+  stringstyle=\color{usydblack},
+  commentstyle=\color{gray}\itshape,
+  %
+  % Box styling
+  backgroundcolor=\color{usydgrey},
+  frame=l,             % Left line only
+  rulecolor=\color{usydred},
+  framesep=5pt,
+  framerule=2pt,
+  xleftmargin=10pt,
+  %
+  % Layout
+  columns=fullflexible,
+  breaklines=true,
+  showstringspaces=false
 }
 
 %==============================================================================
