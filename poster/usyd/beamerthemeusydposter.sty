@@ -2,6 +2,15 @@
 \ProvidesPackage{beamerthemeusydposter}[University of Sydney Beamer Poster Theme]
 
 %==============================================================================
+%                                ENGINE CHECK
+%==============================================================================
+% This theme relies on 'fontspec' features (FakeBold/Slant) which require XeLaTeX.
+\RequirePackage{iftex}
+\ifXeTeX\else
+  \PackageError{beamerthemeusydposter}{This theme requires XeLaTeX}{Please compile using xelatex.}
+\fi
+
+%==============================================================================
 %                               MODE: PRESENTATION
 %==============================================================================
 \mode<presentation>
@@ -9,55 +18,181 @@
 %==============================================================================
 %                                 DEPENDENCIES
 %==============================================================================
-\RequirePackage{graphicx}   % Image handling
-\RequirePackage{etoolbox}   % Conditional logic
-\RequirePackage{tcolorbox}  % Advanced block styling
+% --- Core Utilities ---
+\RequirePackage{etoolbox}             % Conditional logic
+\RequirePackage{calc}                 % Length calculations
+
+% --- Graphics & Layout ---
+\RequirePackage{graphicx}             % Image handling
+\RequirePackage{tikz}                 % Drawing features
+\usetikzlibrary{positioning, calc}    % <--- ADD THIS LINE HERE
+\RequirePackage[export]{adjustbox}    % Image fitting
+\RequirePackage{tcolorbox}            % Advanced block styling
 \tcbuselibrary{raster,skins}
+
+% --- Fonts & Math ---
+\RequirePackage{fontspec}
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{amsfonts}
+
+% --- Tables & Code ---
+\RequirePackage{booktabs}             % Professional tables
+\RequirePackage{listings}             % Code formatting
+
+% --- Bibliography (BibLaTeX) ---
+\RequirePackage[
+  backend=biber,       % The modern backend engine (supports UTF-8 better)
+  style=ieee,          % IEEE style is standard for medical/engineering
+  sorting=none,        % Citations appear in order of appearance
+  maxcitenames=1,      % Force "et al." for citations in text (e.g. [1])
+  mincitenames=1
+]{biblatex}
+\renewcommand*{\bibfont}{\tiny}
 
 %==============================================================================
 %                           ASSETS AND CONFIGURATION
 %==============================================================================
 
 % --- Path Configuration ---
-% Look in local assets first, then shared style assets
-\graphicspath{{assets/}{../../style/usyd/assets/}}
+\newcommand*\USYDFontPath{fonts/}
+\graphicspath{{assets/}}
 
 % --- Internal Variables (Defaults) ---
 \gdef\USYD@logo{USYDLogo}
-\gdef\USYD@affiliationlogo{}
 
-% Default content for the header corners
-\gdef\USYD@poster@logoleftcontent{%
-  \ifdefempty{\USYD@affiliationlogo}{}{%
-    \includegraphics[height=8cm]{\USYD@affiliationlogo}%
-  }%
-}
-\gdef\USYD@poster@logorightcontent{%
-  \includegraphics[height=8cm]{\USYD@logo}%
-}
+% NEW: Initialize these variables to empty strings to prevent errors
+\gdef\USYD@poster@logoleftcontent{}
+\gdef\USYD@poster@logorightcontent{}
 
-% --- Public API (User Commands) ---
-% Sets the main logo and updates the right header slot
-\def\logo#1{%
-  \gdef\USYD@logo{#1}%
-  \logoright{\includegraphics[height=8cm]{#1}}%
-}
-
-% Sets the affiliation logo and updates the left header slot
-\def\affiliationlogo#1{%
-  \gdef\USYD@affiliationlogo{#1}%
-  \logoleft{\includegraphics[height=8cm]{#1}}%
-}
-
-% Direct overrides for header slots (flexibility for custom text/images)
+% % --- Public API (User Commands) ---
+% % Direct overrides for header slots
 \def\logoleft#1{\gdef\USYD@poster@logoleftcontent{#1}}
 \def\logoright#1{\gdef\USYD@poster@logorightcontent{#1}}
 
 %==============================================================================
-%                             THEME IMPORT
+%                                1. COLOURS
 %==============================================================================
-\RequirePackage{../../style/usyd/beamerfontthemeusyd}
-\RequirePackage{../../style/usyd/beamercolorthemeusyd}
+
+% --- Palette ---
+\definecolor{usydred}   {RGB}{236,  95,  50}
+\definecolor{usydblack} {RGB}{ 20,  20,  20}
+\definecolor{usydwhite} {RGB}{255, 255, 255}
+\definecolor{usydgrey}  {RGB}{241, 241, 241}
+
+% --- Global Text ---
+\setbeamercolor{normal text}  {fg=usydblack, bg=usydwhite}
+\setbeamercolor{structure}    {fg=usydred}
+
+% --- Headline & Titles ---
+\setbeamercolor{headline}     {fg=usydwhite, bg=usydred}
+
+\setbeamercolor{title}		{fg=usydwhite, bg=usydred}
+\setbeamercolor{author}		{fg=usydblack}
+\setbeamercolor{institute}	{fg=usydblack}
+
+% --- Footline ---
+\setbeamercolor{footline}     {fg=usydwhite, bg=usydred}
+
+%==============================================================================
+%                                2. FONTS
+%==============================================================================
+\defaultfontfeatures{Ligatures=TeX}
+
+% --- Main & Sans Fonts (Tw Cen MT) ---
+\setmainfont{Tw-Cen-MT}[
+  Path           = \USYDFontPath,
+  Extension      = .ttf,
+  UprightFont    = Tw-Cen-MT,
+  BoldFont       = Tw-Cen-MT,
+  ItalicFont     = Tw-Cen-MT,
+  BoldItalicFont = Tw-Cen-MT,
+  BoldFeatures   = {FakeBold=2.0},
+  ItalicFeatures = {FakeSlant=0.20},
+  BoldItalicFeatures = {FakeBold=2.0, FakeSlant=0.20}
+]
+
+\setsansfont{Tw-Cen-MT}[
+  Path           = \USYDFontPath,
+  Extension      = .ttf,
+  UprightFont    = Tw-Cen-MT,
+  BoldFont       = Tw-Cen-MT,
+  ItalicFont     = Tw-Cen-MT,
+  BoldItalicFont = Tw-Cen-MT,
+  BoldFeatures   = {FakeBold=2.0},
+  ItalicFeatures = {FakeSlant=0.20},
+  BoldItalicFeatures = {FakeBold=2.0, FakeSlant=0.20}
+]
+
+% --- Monospace Font (Google Sans Code) ---
+\setmonofont{GoogleSansCode-Regular}[
+  Path           = \USYDFontPath,
+  Extension      = .ttf,
+  Scale          = MatchLowercase,
+  UprightFont    = GoogleSansCode-Regular,
+  ItalicFont     = GoogleSansCode-Italic,
+  BoldFont       = GoogleSansCode-Bold,
+  BoldItalicFont = GoogleSansCode-BoldItalic
+]
+
+% --- Math Fonts (Custom Tinos Integration) ---
+% 1. Define Tinos Family
+\newfontfamily\USYDTinos{Tinos-Regular}[
+  Path           = \USYDFontPath,
+  Extension      = .ttf,
+  UprightFont    = Tinos-Regular,
+  ItalicFont     = Tinos-Italic,
+  BoldFont       = Tinos-Bold,
+  BoldItalicFont = Tinos-BoldItalic
+]
+
+% 2. Capture Family Names & Map Alphabets (Post-Preamble)
+\newcommand*\USYD@TinosFamily{}
+\newcommand*\USYD@MonoFamily{}
+
+\AtBeginDocument{%
+  % Capture internal family names
+  \begingroup\USYDTinos\global\edef\USYD@TinosFamily{\f@family}\endgroup%
+  \begingroup\ttfamily \global\edef\USYD@MonoFamily {\f@family}\endgroup%
+
+  % Map standard math alphabets to Tinos (Serif Math)
+  \DeclareMathAlphabet{\mathnormal}{TU}{\USYD@TinosFamily}{m}{it}%
+  \SetMathAlphabet{\mathnormal}{bold}{TU}{\USYD@TinosFamily}{b}{it}%
+  \DeclareMathAlphabet{\mathrm}{TU}{\USYD@TinosFamily}{m}{n}%
+  \SetMathAlphabet{\mathrm}{bold}{TU}{\USYD@TinosFamily}{b}{n}%
+  \DeclareMathAlphabet{\mathbf}{TU}{\USYD@TinosFamily}{b}{n}%
+  \DeclareMathAlphabet{\mathit}{TU}{\USYD@TinosFamily}{m}{it}%
+  \SetMathAlphabet{\mathit}{bold}{TU}{\USYD@TinosFamily}{b}{it}%
+  \DeclareMathAlphabet{\mathsf}{TU}{\USYD@TinosFamily}{m}{n}%
+  \SetMathAlphabet{\mathsf}{bold}{TU}{\USYD@TinosFamily}{b}{n}%
+  
+  % Map Monospace Math
+  \DeclareMathAlphabet{\mathtt}{TU}{\USYD@MonoFamily}{m}{n}%
+  \SetMathAlphabet{\mathtt}{bold}{TU}{\USYD@MonoFamily}{b}{n}%
+}
+
+% Ensure \text{...} inside equations uses Tinos
+\let\USYD@origtext\text
+\renewcommand{\text}[1]{%
+  \ifmmode\hbox{\USYDTinos #1}\else\USYD@origtext{#1}\fi%
+}
+
+% --- Beamer Font Assignments ---
+% Default
+\setbeamerfont{normal text}     {family=\rmfamily, size=\normalsize}
+
+% Title page
+\setbeamerfont{headline}        {size=\small}
+\setbeamerfont{title}           {family=\rmfamily, series=\bfseries, size=\LARGE}
+\setbeamerfont{author}          {size=\small}
+\setbeamerfont{institute}       {size=\small}
+\setbeamerfont{date}            {size=\small}
+
+% Footline
+\setbeamerfont{footline}        {size=\small}
+
+% Normal Page
+\setbeamerfont{frametitle} {family=\rmfamily, series=\bfseries, size=\Large}
 
 %==============================================================================
 %                             GENERAL SETTINGS
@@ -67,13 +202,36 @@
 \setbeamertemplate{navigation symbols}{}
 \setbeamertemplate{bibliography item}{\insertbiblabel}
 
+\hypersetup{
+  colorlinks=true,
+  urlcolor=usydred,
+  linkcolor=usydred,
+  citecolor=usydblack,
+}
+
 % --- Spacing Defaults ---
 \setlength{\parskip}{0.35em}
 \setlength{\parindent}{0pt}
 
-%==============================================================================
-%                             BLOCK STYLING
-%==============================================================================
+% --- Code Styling ---
+\lstset{
+  language=Python,
+  basicstyle=\ttfamily\small\color{usydblack},
+  keywordstyle=\color{usydred}\bfseries,
+  stringstyle=\color{usydblack},
+  commentstyle=\color{gray}\itshape,
+  backgroundcolor=\color{usydgrey},
+  frame=l,
+  rulecolor=\color{usydred},
+  framesep=5pt,
+  framerule=2pt,
+  xleftmargin=10pt,
+  columns=fullflexible,
+  breaklines=true,
+  showstringspaces=false
+}
+
+% --- Block Style ---
 \tcbset{
   usydblock/.style={
     enhanced,
@@ -90,7 +248,6 @@
     title={#1},
   }
 }
-
 \setbeamertemplate{block begin}{%
   \begin{tcolorbox}[usydblock={\insertblocktitle}]%
 }
@@ -115,7 +272,7 @@
         % 2. Center Slot
         \begin{column}{0.5\paperwidth}
           \centering
-          \usebeamercolor{title in headline}
+          \usebeamercolor{title}
           {\bfseries \Huge \inserttitle\par}
           \vspace{1em}
           {\Large \insertauthor\par}
@@ -139,15 +296,12 @@
 %==============================================================================
 %                           TEMPLATE: FOOTLINE (Default)
 %==============================================================================
-% This is the default footer. Your poster.tex overrides this with custom info.
-\setbeamertemplate{footline}{%
-  \leavevmode%
-  \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
-    \rule{0pt}{3pt}%
-  \end{beamercolorbox}%
-  \nointerlineskip%
-  \begin{beamercolorbox}[ht=3.5ex, leftskip=1.5em, rightskip=1.5em]{author in head/foot}%
-    \hfill\vskip1ex%
+\setbeamertemplate{footline}{
+  \begin{beamercolorbox}[ht=1.8em,leftskip=1em,rightskip=1em]{footline}%
+    \centering
+    \hfill
+    \small\texttt{dahao.tang@sydney.edu.au}\hspace{2em}
+    \vskip1ex
   \end{beamercolorbox}%
 }
 

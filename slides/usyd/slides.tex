@@ -1,46 +1,18 @@
 % !TeX program = xelatex
+% !BIB program = biber
 \documentclass[aspectratio=169, 12pt]{beamer}
-
-%==============================================================================
-%                               THEME SETUP
-%==============================================================================
-% Loads the USYD theme (which internally loads fonts and colors)
 \usetheme{usyd}
 
-% Path to the image displayed on the title page (right-hand side)
-% Ensure this file exists in style/usyd/assets/ or the local assets/ folder
-\titlegraphic{USYDTitle} 
-
-%==============================================================================
-%                                 PACKAGES
-%==============================================================================
-\usepackage{bookmark}  % Fixes PDF bookmarks in Beamer
-\usepackage{booktabs}  % Professional tables
-
-% Bib
-\usepackage[
-  backend=biber,
-  style=ieee,
-  sorting=ynt
-]{biblatex}
-\addbibresource{refs.bib}
-\AtBeginBibliography{
-  \tiny % or \scriptsize, etc.
-}
-
-%==============================================================================
-%                                 METADATA
-%==============================================================================
-\title{\large Automated AI quantification of Cardiac Function for Early Disease Risk Stratification 
-and Discovery of Genetic Drivers}
-\subtitle{\small Co-supervised by: \\ Prof. David James and Prof. Jinman Kim}
+% --- Title Page Meta Data ---
+\title{Test title}
+\subtitle{Test subtitle}
 \author{Dahao Tang}
 \institute{Faculty of Science}
 \date{}
 
-%==============================================================================
-%                                 DOCUMENT
-%==============================================================================
+% --- Bib File ---
+\addbibresource{refs.bib}
+
 \begin{document}
 
 % --- Title Slide ---
@@ -48,34 +20,13 @@ and Discovery of Genetic Drivers}
   \titlepage
 \end{frame}
 
-\section{Main}
 % --- Table of Contents ---
 \begin{frame}
   \tableofcontents
 \end{frame}
 
-% --- Frame 1: Standard Lists ---
-\begin{frame}{Standard Lists}
-  This is an example of standard itemize and enumerate environments.
-
-  \begin{itemize}
-    \item Level 1 Item
-    \item Level 1 Item
-    \begin{itemize}
-      \item Level 2 Item (Nested)
-      \item Level 2 Item
-    \end{itemize}
-  \end{itemize}
-
-  \vspace{1em}
-
-  \begin{enumerate}
-    \item First Point
-    \item Second Point
-  \end{enumerate}
-\end{frame}
-
-% --- Frame 2: Math Font Verification ---
+% --- Main ---
+\section{Maths Test}
 \begin{frame}{Math Font Check (Tinos)}
   Inline math check: $x + y = z$.
 
@@ -98,7 +49,7 @@ and Discovery of Genetic Drivers}
   \]
 \end{frame}
 
-% --- Frame 3: Code Highlighting ---
+\section{Code Test}
 \begin{frame}[fragile]{Code Example (Google Sans Code)}
   The following code block uses the theme colors automatically.
 
@@ -116,10 +67,11 @@ and Discovery of Genetic Drivers}
   \end{lstlisting}
 \end{frame}
 
+% --- References ---
 \section{Reference}
-\begin{frame}[allowframebreaks, noframenumbering]
-  \frametitle{Reference}
-  \printbibliography[heading=none]
+\begin{frame}[allowframebreaks]
+  \frametitle{References}
+  \printbibliography
 \end{frame}
 
 \end{document}

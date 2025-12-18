@@ -1,36 +1,34 @@
 # =========================
 # Project configuration
 # =========================
-MAIN    = slides
-ENGINE  = xelatex
-FLAGS   = -interaction=nonstopmode -file-line-error
+MAIN        = slides
+ENGINE      = xelatex
+BIBENGINE   = biber
+FLAGS       = -interaction=nonstopmode -file-line-error
 
 # =========================
-# Default target: build + clean
+# Default target
 # =========================
-all: build clean-aux
+all: build clean
 
 # =========================
-# Build PDF (2-pass for beamer)
+# Build PDF
 # =========================
 build: $(MAIN).pdf
 
 $(MAIN).pdf: $(MAIN).tex
 	$(ENGINE) $(FLAGS) $(MAIN).tex
+	$(BIBENGINE) $(MAIN)
+	$(ENGINE) $(FLAGS) $(MAIN).tex
 	$(ENGINE) $(FLAGS) $(MAIN).tex
 
 # =========================
-# Clean auxiliary files only
+# Full Clean (Manual use only)
 # =========================
-clean-aux:
-	rm -f $(MAIN).{aux,bcf,log,nav,out,snm,toc,vrb,fls,fdb_latexmk,synctex.gz,run.xml}
-
-# =========================
-# Full clean (manual use)
-# =========================
-clean: clean-aux
+clean:
+	rm -f $(MAIN).{aux,bbl,bcf,blg,log,nav,out,run.xml,snm,toc,vrb}
 
 distclean: clean
 	rm -f $(MAIN).pdf
 
-.PHONY: all build clean clean-aux distclean
+.PHONY: all build clean distclean

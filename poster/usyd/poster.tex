@@ -1,36 +1,11 @@
 \documentclass{beamer}
-
-%==============================================================================
-%                               THEME SETUP
-%==============================================================================
 \usepackage[orientation=portrait, size=a0, scale=1.0]{beamerposter}
-\mode<presentation>{\usetheme{usydposter}}
+\usetheme{usydposter}
 
-%==============================================================================
-%                                 PACKAGES
-%==============================================================================
-\usepackage[australian]{babel} % Localization
-\usepackage{bookmark}          % PDF Bookmarks
-\usepackage{amsmath, amsfonts} % Maths Environments
-\usepackage{graphicx}          % Image Handling
-\usepackage{tikz}
-\usetikzlibrary{positioning}
+\addbibresource{refs.bib}
 
-\usepackage[backend=biber,style=phys]{biblatex}
-\usepackage{biblatex}
-\setbeamertemplate{bibliography item}{\insertbiblabel}
-\renewcommand*{\bibfont}{\small}
-
-\addbibresource{references.bib}
-
-% Suppress hyperref warnings for superscripts in author names
-\pdfstringdefDisableCommands{\def\textsuperscript#1{#1}}
-
-%==============================================================================
-%                                 METADATA
-%==============================================================================
+% --- Title Page Meta Data ---
 \title{Optimal Look-back Horizon for Time Series Forecasting in Federated Learning}
-
 \author{
   Dahao Tang\textsuperscript{1},
   Nan Yang\textsuperscript{1}\textsuperscript{3},
@@ -39,28 +14,20 @@
   Zhibo Jin\textsuperscript{2},
   Dong Yuan\textsuperscript{1}\textsuperscript{3}
 }
-
 \institute{
   \textsuperscript{1}The University of Sydney \\
-  \textsuperscript{2}University of Technology Sydney
-
-  % \vspace{1em}
+  \textsuperscript{2}University of Technology Sydney \\
   \textsuperscript{3}{Corresponding authors: n.yang@sydney.edu.au, dong.yuan@sydney.edu.au}
 }
 
-%==============================================================================
-%                             HEADER & FOOTER
-%==============================================================================
-% Note: The theme automatically looks in 'assets/' and '../../style/usyd/assets/'
-
 % --- Header Logos ---
-\logoleft{%
-  \includegraphics[height=4.2cm]{AAAILogo}%
+\logoleft{
+  \includegraphics[height=4.2cm]{AAAILogo}
 }
 
 \logoright{%
   \begin{tikzpicture}
-    \node[inner sep=1em] (usyd) {
+    \node[inner sep=1em](usyd) {
       \includegraphics[height=5cm]{USYDLogo}
     }; 
     \node[inner sep=0pt, below=-3cm of usyd] (uts) {
@@ -69,30 +36,6 @@
   \end{tikzpicture}
 }
 
-% --- Footer Contact Info ---
-\setbeamertemplate{footline}{
-  % [FIX] Wrap in \vbox to allow vertical stacking
-  \vbox{%
-    % 1. The Red Line
-    % \begin{beamercolorbox}[wd=\paperwidth]{upper separation line foot}
-    %   \rule{0pt}{3pt}%
-    % \end{beamercolorbox}%
-    
-    % [FIX] Eliminate white gap
-    % \nointerlineskip%
-    
-    % 2. The Content Box
-    \begin{beamercolorbox}[ht=7ex,leftskip=1em,rightskip=1em]{author in head/foot}%
-      \hfill
-      \small\texttt{dahao.tang@sydney.edu.au}\hspace{2em}
-      \vskip1ex
-    \end{beamercolorbox}%
-  }%
-}
-
-%==============================================================================
-%                             DOCUMENT LAYOUT
-%==============================================================================
 \setlength{\columnsep}{1cm}
 
 \begin{document}

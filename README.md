@@ -12,8 +12,6 @@ The current templates include:
 ├── slides
 │   ├── casual      # a deep-blue theme
 │   └── usyd        # a USYD-inspired colour theme template for slides
-└── style
-    └── usyd        # common colour and font theme used by USYD-inspired templates
 ```
 
 ## How to use
@@ -26,8 +24,3 @@ To build with a Makefile:
 2. Go to `./cv`, `./poster` or `./slides` folder depending on your need.
 3. Modify the `xxx.tex` file.
 4. Save it -- it will automatically be built. Only the `slides.pdf` will be kept after the build -- all the other files will be removed.
-
-To build manually:
-
-1. In the terminal, navigate to the folder where `.tex` is at.
-2. Execute `xelatex <cv/poster/slides>.tex && xelatex <cv/poster/slides>.tex`. Note that, it sometimes requires to ask xelatex to build twice to get the final build.
