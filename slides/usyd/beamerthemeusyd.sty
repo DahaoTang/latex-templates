@@ -22,16 +22,6 @@
 \RequirePackage{bookmark}  			      % Fixes PDF bookmarks in Beamer
 \RequirePackage[export]{adjustbox}    % "Object-fit: cover" for title images
 
-% --- Bibliography (BibLaTeX) ---
-\RequirePackage[
-  backend=biber,       % The modern backend engine (supports UTF-8 better)
-  style=ieee,          % IEEE style is standard for medical/engineering
-  sorting=none,        % Citations appear in order of appearance
-  maxcitenames=1,      % Force "et al." for citations in text (e.g. [1])
-  mincitenames=1
-]{biblatex}
-\renewcommand*{\bibfont}{\tiny}
-
 % --- Images ---
 \RequirePackage{graphicx}             % Image handling
 
@@ -46,6 +36,16 @@
 
 % --- Extras ---
 \RequirePackage{listings}             % Code formatting
+
+% --- Bibliography (BibLaTeX) ---
+\RequirePackage[
+  backend=biber,                      % The modern backend engine (supports UTF-8 better)
+  style=ieee,                         % IEEE style is standard for medical/engineering
+  sorting=none,                       % Citations appear in order of appearance
+  maxcitenames=1,                     % Force "et al." for citations in text (e.g. [1])
+  mincitenames=1
+]{biblatex}
+\renewcommand*{\bibfont}{\tiny}
 
 %==============================================================================
 %                               MODE: PRESENTATION
@@ -79,8 +79,8 @@
 \setbeamercolor{structure}    {fg=usydred}
 
 % --- Title Page & Metadata ---
-\setbeamercolor{title}    {fg=usydwhite, bg=usydred}
-\setbeamercolor{subtitle} {fg=usydblack}
+\setbeamercolor{title}        {fg=usydwhite, bg=usydred}
+\setbeamercolor{subtitle}     {fg=usydblack}
 
 % --- Footline ---
 \setbeamercolor{footline}     {fg=usydblack, bg=usydwhite}
@@ -141,31 +141,31 @@
 \newcommand*\USYD@TinosFamily{}
 \newcommand*\USYD@MonoFamily{}
 
-\AtBeginDocument{%
+\AtBeginDocument{
   % Capture internal family names
-  \begingroup\USYDTinos\global\edef\USYD@TinosFamily{\f@family}\endgroup%
-  \begingroup\ttfamily \global\edef\USYD@MonoFamily {\f@family}\endgroup%
+  \begingroup\USYDTinos\global\edef\USYD@TinosFamily{\f@family}\endgroup
+  \begingroup\ttfamily \global\edef\USYD@MonoFamily {\f@family}\endgroup
 
   % Map standard math alphabets to Tinos (Serif Math)
-  \DeclareMathAlphabet{\mathnormal}{TU}{\USYD@TinosFamily}{m}{it}%
-  \SetMathAlphabet{\mathnormal}{bold}{TU}{\USYD@TinosFamily}{b}{it}%
-  \DeclareMathAlphabet{\mathrm}{TU}{\USYD@TinosFamily}{m}{n}%
-  \SetMathAlphabet{\mathrm}{bold}{TU}{\USYD@TinosFamily}{b}{n}%
-  \DeclareMathAlphabet{\mathbf}{TU}{\USYD@TinosFamily}{b}{n}%
-  \DeclareMathAlphabet{\mathit}{TU}{\USYD@TinosFamily}{m}{it}%
-  \SetMathAlphabet{\mathit}{bold}{TU}{\USYD@TinosFamily}{b}{it}%
-  \DeclareMathAlphabet{\mathsf}{TU}{\USYD@TinosFamily}{m}{n}%
-  \SetMathAlphabet{\mathsf}{bold}{TU}{\USYD@TinosFamily}{b}{n}%
+  \DeclareMathAlphabet{\mathnormal}{TU}{\USYD@TinosFamily}{m}{it}
+  \SetMathAlphabet{\mathnormal}{bold}{TU}{\USYD@TinosFamily}{b}{it}
+  \DeclareMathAlphabet{\mathrm}{TU}{\USYD@TinosFamily}{m}{n}
+  \SetMathAlphabet{\mathrm}{bold}{TU}{\USYD@TinosFamily}{b}{n}
+  \DeclareMathAlphabet{\mathbf}{TU}{\USYD@TinosFamily}{b}{n}
+  \DeclareMathAlphabet{\mathit}{TU}{\USYD@TinosFamily}{m}{it}
+  \SetMathAlphabet{\mathit}{bold}{TU}{\USYD@TinosFamily}{b}{it}
+  \DeclareMathAlphabet{\mathsf}{TU}{\USYD@TinosFamily}{m}{n}
+  \SetMathAlphabet{\mathsf}{bold}{TU}{\USYD@TinosFamily}{b}{n}
   
   % Map Monospace Math
-  \DeclareMathAlphabet{\mathtt}{TU}{\USYD@MonoFamily}{m}{n}%
-  \SetMathAlphabet{\mathtt}{bold}{TU}{\USYD@MonoFamily}{b}{n}%
+  \DeclareMathAlphabet{\mathtt}{TU}{\USYD@MonoFamily}{m}{n}
+  \SetMathAlphabet{\mathtt}{bold}{TU}{\USYD@MonoFamily}{b}{n}
 }
 
 % Ensure \text{...} inside equations uses Tinos
 \let\USYD@origtext\text
-\renewcommand{\text}[1]{%
-  \ifmmode\hbox{\USYDTinos #1}\else\USYD@origtext{#1}\fi%
+\renewcommand{\text}[1]{
+  \ifmmode\hbox{\USYDTinos #1}\else\USYD@origtext{#1}\fi
 }
 
 % --- Beamer Font Assignments ---
@@ -219,27 +219,27 @@
              (0.5\paperwidth,0) rectangle (\paperwidth, \paperheight);
 
         % The Image Node (Centered in right pane)
-        \node[inner sep=0pt, anchor=center] at (0.75\paperwidth, 0.5\paperheight) {%
+        \node[inner sep=0pt, anchor=center] at (0.75\paperwidth, 0.5\paperheight) {
           \includegraphics[
             width=0.5\paperwidth,
             height=\paperheight,
             keepaspectratio,
             min width=0.5\paperwidth,
             min height=\paperheight
-          ]{\USYD@titlegraphic}%
+          ]{\USYD@titlegraphic}
         };
       \end{scope}
 
       % 3. Logo (Layered on top)
-      \node[inner sep=0pt, anchor=base west] at (0.7, 0.5) {%
-		\includegraphics[width=3.6cm]{\USYD@logo}
+      \node[inner sep=0pt, anchor=base west] at (0.7, 0.5) {
+		    \includegraphics[width=3.6cm]{\USYD@logo}
       };
 
     \else
       % --- Standard Page Layout ---
       \fill[usydwhite, opacity=1] (0,0) rectangle (\the\paperwidth, \the\paperheight);
     \fi
-  \end{tikzpicture}%
+  \end{tikzpicture}
 }
 
 % --- Title Page Template ---
@@ -248,32 +248,32 @@
   \setlength\beamertitlebox{\dimexpr0.5\paperwidth-\Gm@lmargin\relax}
   
   \begingroup
-    \hskip-10pt%
+    \hskip-10pt
     \begin{beamercolorbox}[sep=0pt, wd=\beamertitlebox, #1]{title}
-      \usebeamerfont{title}\inserttitle\par%
-      \ifx\insertsubtitle\@empty%
-      \else%
-        \vskip0.25em%
-        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
-      \fi%
-    \end{beamercolorbox}%
+      \usebeamerfont{title}\inserttitle\par
+      \ifx\insertsubtitle\@empty
+      \else
+        \vskip0.25em
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}
+      \fi
+    \end{beamercolorbox}
     \vskip3em
 
-    \hskip-10pt%
+    \hskip-10pt
     \begin{beamercolorbox}[sep=0pt, wd=\beamertitlebox, #1]{author}
-      \usebeamerfont{author}\insertauthor%
-    \end{beamercolorbox}%
+      \usebeamerfont{author}\insertauthor
+    \end{beamercolorbox}
     \vskip0.25em
 
-    \hskip-10pt%
+    \hskip-10pt
     \begin{beamercolorbox}[sep=0pt, wd=\beamertitlebox, #1]{institute}
-      \usebeamerfont{institute}\insertinstitute%
-    \end{beamercolorbox}%
+      \usebeamerfont{institute}\insertinstitute
+    \end{beamercolorbox}
     \vskip1em
 
-    \hskip-10pt%
+    \hskip-10pt
     \begin{beamercolorbox}[sep=0pt, wd=\beamertitlebox, #1]{date}
-      \usebeamerfont{date}\insertdate%
+      \usebeamerfont{date}\insertdate
     \end{beamercolorbox}
   \endgroup
 }
@@ -282,22 +282,22 @@
 \defbeamertemplate*{footline}{usyd}{
   \ifnum\thepage=1\relax
     % Empty footer on title page (placeholder to prevent shifts)
-    \begin{beamercolorbox}[wd=\paperwidth, ht=3ex, dp=4ex]{placeholder}%
+    \begin{beamercolorbox}[wd=\paperwidth, ht=3ex, dp=4ex]{placeholder}
     \end{beamercolorbox}
   \else
     % Standard footer
     \begin{beamercolorbox}[wd=\paperwidth, ht=3ex, dp=4ex, leftskip=3.5em, rightskip=4em]{footline}
       University of Sydney\hfill\insertframenumber{}
-    \end{beamercolorbox}%
+    \end{beamercolorbox}
   \fi
 }
 
 % --- Frametitle Template ---
 \defbeamertemplate*{frametitle}{usyd}[1][]{
-  \vskip12pt%
+  \vskip12pt
   \begin{beamercolorbox}[#1]{frametitle}
-    \usebeamerfont{frametitle}\insertframetitle\par%
-  \end{beamercolorbox}%
+    \usebeamerfont{frametitle}\insertframetitle\par
+  \end{beamercolorbox}
 }
 
 % --- Code Style ---

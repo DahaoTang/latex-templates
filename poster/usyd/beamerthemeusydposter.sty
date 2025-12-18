@@ -25,7 +25,7 @@
 % --- Graphics & Layout ---
 \RequirePackage{graphicx}             % Image handling
 \RequirePackage{tikz}                 % Drawing features
-\usetikzlibrary{positioning, calc}    % <--- ADD THIS LINE HERE
+\usetikzlibrary{positioning, calc}
 \RequirePackage[export]{adjustbox}    % Image fitting
 \RequirePackage{tcolorbox}            % Advanced block styling
 \tcbuselibrary{raster,skins}
@@ -42,10 +42,10 @@
 
 % --- Bibliography (BibLaTeX) ---
 \RequirePackage[
-  backend=biber,       % The modern backend engine (supports UTF-8 better)
-  style=ieee,          % IEEE style is standard for medical/engineering
-  sorting=none,        % Citations appear in order of appearance
-  maxcitenames=1,      % Force "et al." for citations in text (e.g. [1])
+  backend=biber,                      % The modern backend engine (supports UTF-8 better)
+  style=ieee,                         % IEEE style is standard for medical/engineering
+  sorting=none,                       % Citations appear in order of appearance
+  maxcitenames=1,                     % Force "et al." for citations in text (e.g. [1])
   mincitenames=1
 ]{biblatex}
 \renewcommand*{\bibfont}{\tiny}
@@ -61,12 +61,11 @@
 % --- Internal Variables (Defaults) ---
 \gdef\USYD@logo{USYDLogo}
 
-% NEW: Initialize these variables to empty strings to prevent errors
+% Initialize these variables to empty strings to prevent errors
 \gdef\USYD@poster@logoleftcontent{}
 \gdef\USYD@poster@logorightcontent{}
 
-% % --- Public API (User Commands) ---
-% % Direct overrides for header slots
+% --- Public API (User Commands) ---
 \def\logoleft#1{\gdef\USYD@poster@logoleftcontent{#1}}
 \def\logoright#1{\gdef\USYD@poster@logorightcontent{#1}}
 
@@ -87,9 +86,9 @@
 % --- Headline & Titles ---
 \setbeamercolor{headline}     {fg=usydwhite, bg=usydred}
 
-\setbeamercolor{title}		{fg=usydwhite, bg=usydred}
-\setbeamercolor{author}		{fg=usydblack}
-\setbeamercolor{institute}	{fg=usydblack}
+\setbeamercolor{title}		    {fg=usydwhite, bg=usydred}
+\setbeamercolor{author}		    {fg=usydblack}
+\setbeamercolor{institute}	  {fg=usydblack}
 
 % --- Footline ---
 \setbeamercolor{footline}     {fg=usydwhite, bg=usydred}
@@ -150,31 +149,31 @@
 \newcommand*\USYD@TinosFamily{}
 \newcommand*\USYD@MonoFamily{}
 
-\AtBeginDocument{%
+\AtBeginDocument{
   % Capture internal family names
-  \begingroup\USYDTinos\global\edef\USYD@TinosFamily{\f@family}\endgroup%
-  \begingroup\ttfamily \global\edef\USYD@MonoFamily {\f@family}\endgroup%
+  \begingroup\USYDTinos\global\edef\USYD@TinosFamily{\f@family}\endgroup
+  \begingroup\ttfamily \global\edef\USYD@MonoFamily {\f@family}\endgroup
 
   % Map standard math alphabets to Tinos (Serif Math)
-  \DeclareMathAlphabet{\mathnormal}{TU}{\USYD@TinosFamily}{m}{it}%
-  \SetMathAlphabet{\mathnormal}{bold}{TU}{\USYD@TinosFamily}{b}{it}%
-  \DeclareMathAlphabet{\mathrm}{TU}{\USYD@TinosFamily}{m}{n}%
-  \SetMathAlphabet{\mathrm}{bold}{TU}{\USYD@TinosFamily}{b}{n}%
-  \DeclareMathAlphabet{\mathbf}{TU}{\USYD@TinosFamily}{b}{n}%
-  \DeclareMathAlphabet{\mathit}{TU}{\USYD@TinosFamily}{m}{it}%
-  \SetMathAlphabet{\mathit}{bold}{TU}{\USYD@TinosFamily}{b}{it}%
-  \DeclareMathAlphabet{\mathsf}{TU}{\USYD@TinosFamily}{m}{n}%
-  \SetMathAlphabet{\mathsf}{bold}{TU}{\USYD@TinosFamily}{b}{n}%
+  \DeclareMathAlphabet{\mathnormal}{TU}{\USYD@TinosFamily}{m}{it}
+  \SetMathAlphabet{\mathnormal}{bold}{TU}{\USYD@TinosFamily}{b}{it}
+  \DeclareMathAlphabet{\mathrm}{TU}{\USYD@TinosFamily}{m}{n}
+  \SetMathAlphabet{\mathrm}{bold}{TU}{\USYD@TinosFamily}{b}{n}
+  \DeclareMathAlphabet{\mathbf}{TU}{\USYD@TinosFamily}{b}{n}
+  \DeclareMathAlphabet{\mathit}{TU}{\USYD@TinosFamily}{m}{it}
+  \SetMathAlphabet{\mathit}{bold}{TU}{\USYD@TinosFamily}{b}{it}
+  \DeclareMathAlphabet{\mathsf}{TU}{\USYD@TinosFamily}{m}{n}
+  \SetMathAlphabet{\mathsf}{bold}{TU}{\USYD@TinosFamily}{b}{n}
   
   % Map Monospace Math
-  \DeclareMathAlphabet{\mathtt}{TU}{\USYD@MonoFamily}{m}{n}%
-  \SetMathAlphabet{\mathtt}{bold}{TU}{\USYD@MonoFamily}{b}{n}%
+  \DeclareMathAlphabet{\mathtt}{TU}{\USYD@MonoFamily}{m}{n}
+  \SetMathAlphabet{\mathtt}{bold}{TU}{\USYD@MonoFamily}{b}{n}
 }
 
 % Ensure \text{...} inside equations uses Tinos
 \let\USYD@origtext\text
-\renewcommand{\text}[1]{%
-  \ifmmode\hbox{\USYDTinos #1}\else\USYD@origtext{#1}\fi%
+\renewcommand{\text}[1]{
+  \ifmmode\hbox{\USYDTinos #1}\else\USYD@origtext{#1}\fi
 }
 
 % --- Beamer Font Assignments ---
@@ -195,7 +194,7 @@
 \setbeamerfont{frametitle} {family=\rmfamily, series=\bfseries, size=\Large}
 
 %==============================================================================
-%                             GENERAL SETTINGS
+%                            LAYOUT & TEMPLATES
 %==============================================================================
 
 % --- Navigation & Bibliography ---
@@ -248,18 +247,16 @@
     title={#1},
   }
 }
-\setbeamertemplate{block begin}{%
-  \begin{tcolorbox}[usydblock={\insertblocktitle}]%
+\setbeamertemplate{block begin}{
+  \begin{tcolorbox}[usydblock={\insertblocktitle}]
 }
-\setbeamertemplate{block end}{%
-  \end{tcolorbox}\vspace{0.3em}%
+\setbeamertemplate{block end}{
+  \end{tcolorbox}\vspace{0.3em}
 }
 
-%==============================================================================
-%                           TEMPLATE: HEADLINE
-%==============================================================================
+% --- Headline ---
 \setbeamertemplate{headline}{
-  \vbox{%
+  \vbox{
     \begin{beamercolorbox}[wd=\paperwidth, sep=0.5cm]{headline}
       \begin{columns}[c]
         
@@ -286,18 +283,16 @@
         \end{column}
 
       \end{columns}
-    \end{beamercolorbox}%
-    \nointerlineskip%
+    \end{beamercolorbox}
+    \nointerlineskip
     \begin{beamercolorbox}[wd=\paperwidth, ht=0cm]{lower separation line head}
-    \end{beamercolorbox}%
-  }%
+    \end{beamercolorbox}
+  }
 }
 
-%==============================================================================
-%                           TEMPLATE: FOOTLINE (Default)
-%==============================================================================
+% --- Footline ---
 \setbeamertemplate{footline}{
-  \begin{beamercolorbox}[ht=1.8em,leftskip=1em,rightskip=1em]{footline}%
+  \begin{beamercolorbox}[ht=1.8em,leftskip=1em,rightskip=1em]{footline}
     \centering
     \hfill
     \small\texttt{dahao.tang@sydney.edu.au}\hspace{2em}
