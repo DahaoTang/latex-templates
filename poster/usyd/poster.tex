@@ -1,3 +1,5 @@
+% !TeX program = xelatex
+% !BIB program = biber
 \documentclass{beamer}
 \usepackage[orientation=portrait, size=a0, scale=1.0]{beamerposter}
 \usetheme{usydposter}
@@ -22,17 +24,20 @@
 
 % --- Header Logos ---
 \logoleft{
-  \includegraphics[height=4.2cm]{AAAILogo}
-}
-
-\logoright{
   \begin{tikzpicture}
-    \node[inner sep=1em](usyd) {
+    \node[inner sep=0em](usyd) {
       \includegraphics[height=5cm]{USYDLogo}
     }; 
     \node[inner sep=0pt, below=-3cm of usyd] (uts) {
-      \includegraphics[height=10cm]{UTSLogo}
+      \includegraphics[height=10cm]{UTSLogo}\hspace{-2cm}
     };
+  \end{tikzpicture}\vspace{-3cm}
+}
+\logoright{
+  \begin{tikzpicture}
+    \node[inner sep=0em](aaai26) {
+      \includegraphics[height=10cm]{AAAI26}\hspace{1cm}
+    }; 
   \end{tikzpicture}
 }
 
@@ -52,18 +57,21 @@
       \begin{block}{Abstract}
         Selecting an appropriate look-back horizon remains a fundamental challenge 
         in time series forecasting (TSF), particularly in federated learning scenarios where 
-        data is decentralized, heterogeneous, and often non-independent. While recent work has explored 
-        horizon selection by preserving forecasting-relevant information in an intrinsic space, 
-        these approaches are primarily restricted to centralized and independently distributed settings. 
+        data is decentralized, heterogeneous, and often non-independent. 
+        While recent work has explored horizon selection by preserving forecasting, 
+        relevant information in an intrinsic space, these approaches are primarily 
+        restricted to centralized and independently distributed settings. 
         This paper presents a principled framework for adaptive horizon selection in 
-        federated time series forecasting through an intrinsic space formulation. We introduce 
-        a synthetic data generator (SDG) that captures essential temporal structures in 
-        client data, including autoregressive dependencies, seasonality, and trend, 
-        while incorporating client-specific heterogeneity. Building on this model, we define a transformation that 
-        maps time series windows into an intrinsic representation space with well-defined geometric and statistical properties. 
-        We then derive a decomposition of the forecasting loss into a Bayesian term (irreducible uncertainty) 
-        and an approximation term (finite-sample effects and limited model capacity). 
-        Our analysis shows that while increasing the look-back horizon improves identifiability, 
+        federated time series forecasting through an intrinsic space formulation. 
+        We introduce a synthetic data generator (SDG) that captures essential temporal structures 
+        in client data, including autoregressive dependencies, seasonality, and trend, 
+        while incorporating client-specific heterogeneity. Building on this model, 
+        we define a transformation that maps time series windows into an 
+        intrinsic representation space with well-defined geometric and statistical properties. 
+        We then derive a decomposition of the forecasting loss into a 
+        Bayesian term (irreducible uncertainty) and an approximation term 
+        (finite-sample effects and limited model capacity). Our analysis shows that 
+        while increasing the look-back horizon improves identifiability, 
         it also increases approximation error. We prove that the total forecasting loss is 
         minimized at the smallest horizon where the irreducible loss starts to saturate.
       \end{block}
@@ -164,7 +172,6 @@
 
         \begin{theorem}[Federated Loss Decomposition]
           \label{thm:federated_loss_decomposition}
-
           For each client $k \in \{1,\dots,K\}$, let $(U_k, V_k)$ denote its data-generating pair, 
           where $U_k$ takes values in a measurable input space $\mathcal{M}(H)$ and $V_k$ in an output space $\mathcal{M}(S)$, 
           both embedded in a real Hilbert space $(\mathcal{H},\|\cdot\|)$ with the associated Borel $\sigma$-algebras. 
@@ -191,7 +198,6 @@
           In particular, the total loss separates into the expected irreducible (client-wise Bayes) component and 
           the expected approximation error of the global predictor relative to each client’s Bayes-optimal rule.
           Please refer to the Extended Version for the proof.
-
         \end{theorem}
                 
       \end{block}

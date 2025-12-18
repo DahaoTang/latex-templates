@@ -93,6 +93,9 @@
 % --- Footline ---
 \setbeamercolor{footline}     {fg=usydwhite, bg=usydred}
 
+% --- Block and Subblock ---
+\setbeamercolor{subblock}     {fg=usydwhite, bg=usydgrey}
+
 %==============================================================================
 %                                2. FONTS
 %==============================================================================
@@ -231,33 +234,32 @@
 }
 
 % --- Block Style ---
-\tcbset{
-  usydblock/.style={
+\defbeamertemplate*{block begin}{bordered}{%
+  \tcbset{
     enhanced,
     sharp corners,
-    colback=usydwhite,
     colframe=usydred,
+    colback=usydwhite,
     boxsep=0.6em,
-    boxrule=2pt,
-    left=0.8em,
-    right=0.8em,
-    top=0.7em,
-    bottom=0.7em,
+    boxrule=0.1em,
+    % left=0.8em,
+    % right=0.8em,
+    % top=0.7em,
+    % bottom=0.7em,
     fonttitle=\bfseries,
-    title={#1},
   }
+  \begin{tcolorbox}[title=\insertblocktitle]
 }
-\setbeamertemplate{block begin}{
-  \begin{tcolorbox}[usydblock={\insertblocktitle}]
-}
-\setbeamertemplate{block end}{
-  \end{tcolorbox}\vspace{0.3em}
+
+\defbeamertemplate*{block end}{borderd}{%
+  \end{tcolorbox}
+  \vspace{1em}
 }
 
 % --- Headline ---
 \setbeamertemplate{headline}{
   \vbox{
-    \begin{beamercolorbox}[wd=\paperwidth, sep=0.5cm]{headline}
+    \begin{beamercolorbox}[wd=\paperwidth, sep=1cm]{headline}
       \begin{columns}[c]
         
         % 1. Left Slot
@@ -296,7 +298,7 @@
     \centering
     \hfill
     \small\texttt{dahao.tang@sydney.edu.au}\hspace{2em}
-    \vskip1ex
+    \vskip0.4em
   \end{beamercolorbox}%
 }
 
