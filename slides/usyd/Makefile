@@ -1,34 +1,16 @@
-# =========================
-# Project configuration
-# =========================
-MAIN        = slides
-ENGINE      = xelatex
-BIBENGINE   = biber
-FLAGS       = -interaction=nonstopmode -file-line-error
+MAIN=slides
+OUT=out
+LATEXMK=latexmk
+LATEXMKFLAGS=-xelatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=$(OUT)
 
-# =========================
-# Default target
-# =========================
-all: build clean
+.PHONY: all clean watch
 
-# =========================
-# Build PDF
-# =========================
-build: $(MAIN).pdf
+all:
+	$(LATEXMK) $(LATEXMKFLAGS) $(MAIN).tex
 
-$(MAIN).pdf: $(MAIN).tex
-	$(ENGINE) $(FLAGS) $(MAIN).tex
-	$(BIBENGINE) $(MAIN)
-	$(ENGINE) $(FLAGS) $(MAIN).tex
-	$(ENGINE) $(FLAGS) $(MAIN).tex
-
-# =========================
-# Full Clean (Manual use only)
-# =========================
 clean:
-	rm -f $(MAIN).{aux,bbl,bcf,blg,log,nav,out,run.xml,snm,toc,vrb}
+	$(LATEXMK) -C -outdir=$(OUT)
+	rm -f $(PDF)
 
-distclean: clean
-	rm -f $(MAIN).pdf
-
-.PHONY: all build clean distclean
+watch:
+	$(LATEXMK) $(LATEXMKFLAGS) -pvc $(MAIN).tex

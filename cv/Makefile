@@ -1,36 +1,15 @@
-# =========================
-# Project configuration
-# =========================
-MAIN    = cv
-ENGINE  = xelatex
-FLAGS   = -interaction=nonstopmode -file-line-error
+MAIN=cv
+OUT=out
+LATEXMK=latexmk
+LATEXMKFLAGS=-xelatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=$(OUT)
 
-# =========================
-# Default target: build + clean
-# =========================
-all: build clean-aux
+.PHONY: all clean watch
 
-# =========================
-# Build PDF (2-pass for beamer)
-# =========================
-build: $(MAIN).pdf
+all:
+	$(LATEXMK) $(LATEXMKFLAGS) $(MAIN).tex
 
-$(MAIN).pdf: $(MAIN).tex
-	$(ENGINE) $(FLAGS) $(MAIN).tex
-	$(ENGINE) $(FLAGS) $(MAIN).tex
+clean:
+	$(LATEXMK) -C -outdir=$(OUT)
 
-# =========================
-# Clean auxiliary files only
-# =========================
-clean-aux:
-	rm -f $(MAIN).{aux,bcf,log,nav,out,snm,toc,vrb,fls,fdb_latexmk,synctex.gz,run.xml}
-
-# =========================
-# Full clean (manual use)
-# =========================
-clean: clean-aux
-
-distclean: clean
-	rm -f $(MAIN).pdf
-
-.PHONY: all build clean clean-aux distclean
+watch:
+	$(LATEXMK) $(LATEXMKFLAGS) -pvc $(MAIN).tex
