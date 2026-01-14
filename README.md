@@ -6,13 +6,13 @@ The current templates include:
 
 ```
 .
-├── card		# a business card template with USYD logo
-├── cv			# a standard latex cv
+├── card        # a business card template with USYD logo
+├── cv          # a standard latex cv
 ├── poster
-│   └── usyd	# a USYD-inspired colour theme template for poster
+│   └── usyd    # a USYD-inspired colour theme template for poster
 ├── slides
-│   ├── casual	# a deep-blue theme
-│   └── usyd	# a USYD-inspired colour theme template for slides
+│   ├── casual  # a deep-blue theme
+│   └── usyd    # a USYD-inspired colour theme template for slides
 ```
 
 To make the template simple and easy-to-use, after careful consideration, the current template uses **_only one centralised_** `.sty` file which contains the font, colour, and structural design that tend to be kept in different files by beamer convention.
