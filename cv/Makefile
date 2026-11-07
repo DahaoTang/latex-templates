@@ -1,4 +1,4 @@
-MAIN=cv
+MAIN=cv-dahao_tang
 OUT=out
 LATEXMK=latexmk
 LATEXMKFLAGS=-xelatex -synctex=1 -interaction=nonstopmode -file-line-error -outdir=$(OUT)

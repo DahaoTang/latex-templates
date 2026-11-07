@@ -29,10 +29,11 @@
 % =============================
 \newcommand{\MyNameEN}{Dahao Tang} 
 \newcommand{\MyEmail}{dahao.tang@sydney.edu.au}
-\newcommand{\MyPhone}{+61 04 1663 1588}
+\newcommand{\MyPhone}{(+61) 04 1663 1588}
 \newcommand{\MyWebsite}{https://dahaotang.com/}
 \newcommand{\MyGitHub}{https://github.com/DahaoTang}
 \newcommand{\MyLinkedIn}{https://www.linkedin.com/in/dahaotang/}
+\newcommand{\MyGoogleScholar}{https://scholar.google.com/citations?user=DPLu-fgAAAAJ}
 
 % =============================
 % Formatting Definitions
@@ -56,9 +57,11 @@
 }
 
 % Publication Entry Format
+% Ragged right so long titles wrap between words instead of hyphenating
 \newcommand{\PublicationEntry}[3]{
+  {\raggedright
   \noindent \textbf{#1} \hfill #2 \\
-  {\small #3} \par
+  {\small #3} \par}
   \vspace{4pt}
 }
 
@@ -79,10 +82,11 @@
   {\Huge \textbf{\MyNameEN}} \\ \vspace{5pt}
   \small
   Email: \MyEmail \ \textbullet \ \ 
-  Phone: \MyPhone \ \textbullet \ \ 
-  Website: \href{\MyWebsite}{\MyWebsite} \\
+  Phone: \MyPhone \ \textbullet \ \
+  Personal Website: \href{\MyWebsite}{\MyWebsite} \\
   GitHub: \href{\MyGitHub}{\MyGitHub} \ \textbullet \ \  
-  LinkedIn: \href{\MyLinkedIn}{\MyLinkedIn}
+  LinkedIn: \href{\MyLinkedIn}{\MyLinkedIn} \\
+  Google Scholar: \href{\MyGoogleScholar}{\MyGoogleScholar}
 \end{center}
 
 \vspace{-5pt}
@@ -91,67 +95,73 @@
 \section{Education}
 
 \EducationEntry{David James Lab, Charles Perkins Centre, University of Sydney}{Mar 2026 -- Present}
-{Master of Philosophy}{AI \& Biology, co-supervised by Prof. David James and Prof. Jinman Kim}
+{Master of Philosophy}{AI \& Biology, supervised by Prof. David James and Prof. Jinman Kim}
 
-\EducationEntry{University of Sydney}{Feb 2021 -- Nov 2025}
-{Bachelor of Advanced Computing}{Computer Science, First Class Honours}
+\EducationEntry{University of Sydney}
+{Feb 2021 -- Nov 2025}
+{Bachelor of Advanced Computing}
+{Majored in Computer Science, Honours Class I, supervised by A/Prof. Tongliang Liu}
 
-\EducationEntry{University of Sydney}{Feb 2021 -- Nov 2025}
-{Bachelor of Commerce}{Finance}
+\EducationEntry{University of Sydney}
+{Feb 2021 -- Nov 2025}
+{Bachelor of Commerce}{Majored in Finance}
 
 % --- Publications ---
 \section{Publications}
-\PublicationEntry{Optimal Look-back Horizon for Time Series Forecasting in Federated Learning}{AAAI 2026 Oral}
+\PublicationEntry{\href{https://ojs.aaai.org/index.php/AAAI/article/view/39781}{Optimal Look-back Horizon for Time Series Forecasting in Federated Learning}}{AAAI 2026 (Oral)}
 {\underline{Dahao Tang}, Nan Yang, Yanli Li, Zhiyu Zhu, Zhibo Jin, Dong Yuan}
 
-\PublicationEntry{Stability-Driven CNN Training with Lyapunov-Based Dynamic Learning Rate}{ADC 2024}
+\PublicationEntry{\href{https://link.springer.com/chapter/10.1007/978-981-96-1242-0_5}{Stability-Driven CNN Training with Lyapunov-Based Dynamic Learning Rate}}{ADC 2024}
 {\underline{Dahao Tang}, Nan Yang, Yongkun Deng, Yuning Zhang, Abubakar Sadiq Sani, Dong Yuan}
 
-\PublicationEntry{Adaptformer: An Adaptive Multimodal Deep Decomposition Approach for Power Consumption Forecasting}{ADMA 2024}
+\PublicationEntry{\href{https://link.springer.com/chapter/10.1007/978-981-96-0847-8_4}{Adaptformer: An Adaptive Multimodal Deep Decomposition Approach for Power Consumption Forecasting}}{ADMA 2024}
 {Nan Yang, Yuning Zhang, Yunqi Wang, \underline{Dahao Tang}, Yanli Li, Dong Yuan}
 
 % --- Work Experience ---
 \section{Work Experience}
-\ExperienceEntry{University of Sydney}{Nov 2024 -- Present}
+\ExperienceEntry{University of Sydney}{Jul 2024 -- Present}
 {Research Assistant, School of Life and Environment Science}
-{Lead developer for Tesserome (previously ProteHome) at the David James Lab; engineering tools to support biological data analysis.}
+{Co-founder and lead developer of Tesserome (previously ProtHome) at the David James Lab}
 
 \ExperienceEntry{University of Sydney}{Aug 2024 -- Present}
 {Academic Tutor, School of Computer Science}
 {ISYS2120: Data and Information Management (2024 S2, 2026 S2)}
 
 % --- Projects ---
-\section{Projects Experience}
+\section{Professional Experience}
 
-\ExperienceEntry{Tesserome}{July 2024 -- Present}
-{Co-founder, Research Assistant, Software Engineer}
-{Producing a platform for storing and analysing multi-omics data. Empowering meta-analysis through AI and modern OLAP data pipeline.}
+\ExperienceEntry{\href{https://tesserome.com/}{Tesserome}}{Jul 2024 -- Present}
+{David James Lab Project; Co-founder}
+{Creating a platform for storing and analysing multi-omics data. Empowering meta-analysis across a large volume of datasets}
 
-\ExperienceEntry{Cytomotif}{March 2026 -- Present}
+\ExperienceEntry{\href{https://cytomotif.streamlit.app/}{Cytomotif}}{Mar 2026 -- May 2026}
 {Research Project}
-{Develop a web tool for identifying motif patterns in the cytoplasmic sequences of SLC family members that traffic to the plasma membrane in response to insulin.}
+{Developed a web tool for identifying motif patterns in the cytoplasmic sequences of SLC family members that traffic to the plasma membrane in response to insulin}
 
-\ExperienceEntry{ioulia.ai}{Jan 2024 -- July 2024}
-{Co-founder}
-{Designed the technical roadmap and engineered the Minimum Viable Product (MVP) from scratch. 
-Optimized product performance and LLM responses by implementing advanced prompt engineering techniques such as Chain-of-Thought (CoT).}
+\ExperienceEntry{Émeline}{Dec 2024 -- Feb 2025}
+{Personal Project}
+{Agent with smart memory. Demo link: \href{https://vimeo.com/1073007297/8ba13cb601}{https://vimeo.com/1073007297/8ba13cb601}}
+
+\ExperienceEntry{ioulia.ai}{Jan 2024 -- Jul 2024}
+{Startup; Co-founder}
+{AI Tarot Master. Designed the technical roadmap and engineered the MVP from scratch}
 
 \ExperienceEntry{GigHero}{Apr 2023 -- Aug 2024}
-{Co-founder}
-{Developed a two-sided online marketplace MVP for on-site services using React and Express.}
+{Startup; Co-founder}
+{Two-sided online marketplace MVP for on-site services. Developed the web platform using React and Express}
 
 \ExperienceEntry{Searten}{Aug 2023 -- Nov 2023}
-{University Project, Project Manager, Full-stack Developer}
-{Led a cross-functional team to develop a web-based platform MVP, overseeing the project lifecycle.}
+{University-Industry Collaboration Project; Project Manager, Full-stack Developer}
+{Led a cross-functional team to develop the web MVP for a local startup Searten, overseeing the project lifecycle}
 
 \ExperienceEntry{File System Implementation with FUSE}{2022}
 {University Project}
 {Implemented a functional file system in C using the FUSE interface, 
-engineered support for large file handling and hierarchical directory structures.}
+engineered support for large file handling and hierarchical directory structures}
 
 \ExperienceEntry{OS Scheduler Implementation}{2022}
 {University Project}
 {Designed and implemented an operating system scheduler in C.
-Integrated Round Robin and Multi-Level Feedback Queue (MLFQ) algorithms to optimize process execution efficiency.}
+Integrated Round Robin and Multi-Level Feedback Queue (MLFQ) to optimise process execution efficiency}
 
 \end{document}
